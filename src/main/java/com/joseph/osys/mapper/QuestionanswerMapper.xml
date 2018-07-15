@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.joseph.osys.mapper.QuestionanswerMapper" >
+  <resultMap id="BaseResultMap" type="com.joseph.osys.pojos.Questionanswer" >
+    <id column="AnswerId" property="answerid" jdbcType="INTEGER" />
+    <result column="AnswerTime" property="answertime" jdbcType="TIMESTAMP" />
+    <result column="QuestionId" property="questionid" jdbcType="INTEGER" />
+    <result column="Creater" property="creater" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.joseph.osys.pojos.Questionanswer" extends="BaseResultMap" >
+    <result column="AnswerContent" property="answercontent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    AnswerId, AnswerTime, QuestionId, Creater
+  </sql>
+  <sql id="Blob_Column_List" >
+    AnswerContent
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.joseph.osys.pojos.QuestionanswerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from questionanswer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.joseph.osys.pojos.QuestionanswerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from questionanswer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from questionanswer
+    where AnswerId = #{answerid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from questionanswer
+    where AnswerId = #{answerid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.joseph.osys.pojos.QuestionanswerExample" >
+    delete from questionanswer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.joseph.osys.pojos.Questionanswer" >
+    insert into questionanswer (AnswerId, AnswerTime, QuestionId, 
+      Creater, AnswerContent)
+    values (#{answerid,jdbcType=INTEGER}, #{answertime,jdbcType=TIMESTAMP}, #{questionid,jdbcType=INTEGER}, 
+      #{creater,jdbcType=VARCHAR}, #{answercontent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.joseph.osys.pojos.Questionanswer" >
+    insert into questionanswer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="answerid != null" >
+        AnswerId,
+      </if>
+      <if test="answertime != null" >
+        AnswerTime,
+      </if>
+      <if test="questionid != null" >
+        QuestionId,
+      </if>
+      <if test="creater != null" >
+        Creater,
+      </if>
+      <if test="answercontent != null" >
+        AnswerContent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="answerid != null" >
+        #{answerid,jdbcType=INTEGER},
+      </if>
+      <if test="answertime != null" >
+        #{answertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="questionid != null" >
+        #{questionid,jdbcType=INTEGER},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="answercontent != null" >
+        #{answercontent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.joseph.osys.pojos.QuestionanswerExample" resultType="java.lang.Integer" >
+    select count(*) from questionanswer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update questionanswer
+    <set >
+      <if test="record.answerid != null" >
+        AnswerId = #{record.answerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.answertime != null" >
+        AnswerTime = #{record.answertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.questionid != null" >
+        QuestionId = #{record.questionid,jdbcType=INTEGER},
+      </if>
+      <if test="record.creater != null" >
+        Creater = #{record.creater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.answercontent != null" >
+        AnswerContent = #{record.answercontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update questionanswer
+    set AnswerId = #{record.answerid,jdbcType=INTEGER},
+      AnswerTime = #{record.answertime,jdbcType=TIMESTAMP},
+      QuestionId = #{record.questionid,jdbcType=INTEGER},
+      Creater = #{record.creater,jdbcType=VARCHAR},
+      AnswerContent = #{record.answercontent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update questionanswer
+    set AnswerId = #{record.answerid,jdbcType=INTEGER},
+      AnswerTime = #{record.answertime,jdbcType=TIMESTAMP},
+      QuestionId = #{record.questionid,jdbcType=INTEGER},
+      Creater = #{record.creater,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.joseph.osys.pojos.Questionanswer" >
+    update questionanswer
+    <set >
+      <if test="answertime != null" >
+        AnswerTime = #{answertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="questionid != null" >
+        QuestionId = #{questionid,jdbcType=INTEGER},
+      </if>
+      <if test="creater != null" >
+        Creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="answercontent != null" >
+        AnswerContent = #{answercontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where AnswerId = #{answerid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.joseph.osys.pojos.Questionanswer" >
+    update questionanswer
+    set AnswerTime = #{answertime,jdbcType=TIMESTAMP},
+      QuestionId = #{questionid,jdbcType=INTEGER},
+      Creater = #{creater,jdbcType=VARCHAR},
+      AnswerContent = #{answercontent,jdbcType=LONGVARCHAR}
+    where AnswerId = #{answerid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.joseph.osys.pojos.Questionanswer" >
+    update questionanswer
+    set AnswerTime = #{answertime,jdbcType=TIMESTAMP},
+      QuestionId = #{questionid,jdbcType=INTEGER},
+      Creater = #{creater,jdbcType=VARCHAR}
+    where AnswerId = #{answerid,jdbcType=INTEGER}
+  </update>
+</mapper>

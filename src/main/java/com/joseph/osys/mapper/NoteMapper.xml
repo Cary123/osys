@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.joseph.osys.mapper.NoteMapper" >
+  <resultMap id="BaseResultMap" type="com.joseph.osys.pojos.Note" >
+    <id column="NoteId" property="noteid" jdbcType="INTEGER" />
+    <result column="NoteTime" property="notetime" jdbcType="TIMESTAMP" />
+    <result column="BookId" property="bookid" jdbcType="INTEGER" />
+    <result column="Creater" property="creater" jdbcType="VARCHAR" />
+    <result column="NoteContent" property="notecontent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.joseph.osys.pojos.Note" extends="BaseResultMap" >
+    <result column="NoteContent" property="notecontent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    NoteId, NoteTime, BookId, Creater
+  </sql>
+  <sql id="Blob_Column_List" >
+    NoteContent
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.joseph.osys.pojos.NoteExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+   <include refid="Blob_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from note
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.joseph.osys.pojos.NoteExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+      ,
+    <include refid="Blob_Column_List" />
+    from note
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from note
+    where NoteId = #{noteid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from note
+    where NoteId = #{noteid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.joseph.osys.pojos.NoteExample" >
+    delete from note
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.joseph.osys.pojos.Note" >
+    insert into note (NoteId, NoteTime, BookId, 
+      Creater, NoteContent)
+    values (#{noteid,jdbcType=INTEGER}, #{notetime,jdbcType=TIMESTAMP}, #{bookid,jdbcType=INTEGER}, 
+      #{creater,jdbcType=VARCHAR}, #{notecontent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.joseph.osys.pojos.Note" >
+    insert into note
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="noteid != null" >
+        NoteId,
+      </if>
+      <if test="notetime != null" >
+        NoteTime,
+      </if>
+      <if test="bookid != null" >
+        BookId,
+      </if>
+      <if test="creater != null" >
+        Creater,
+      </if>
+      <if test="notecontent != null" >
+        NoteContent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="noteid != null" >
+        #{noteid,jdbcType=INTEGER},
+      </if>
+      <if test="notetime != null" >
+        #{notetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bookid != null" >
+        #{bookid,jdbcType=INTEGER},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="notecontent != null" >
+        #{notecontent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.joseph.osys.pojos.NoteExample" resultType="java.lang.Integer" >
+    select count(*) from note
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update note
+    <set >
+      <if test="record.noteid != null" >
+        NoteId = #{record.noteid,jdbcType=INTEGER},
+      </if>
+      <if test="record.notetime != null" >
+        NoteTime = #{record.notetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.bookid != null" >
+        BookId = #{record.bookid,jdbcType=INTEGER},
+      </if>
+      <if test="record.creater != null" >
+        Creater = #{record.creater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notecontent != null" >
+        NoteContent = #{record.notecontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update note
+    set NoteId = #{record.noteid,jdbcType=INTEGER},
+      NoteTime = #{record.notetime,jdbcType=TIMESTAMP},
+      BookId = #{record.bookid,jdbcType=INTEGER},
+      Creater = #{record.creater,jdbcType=VARCHAR},
+      NoteContent = #{record.notecontent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update note
+    set NoteId = #{record.noteid,jdbcType=INTEGER},
+      NoteTime = #{record.notetime,jdbcType=TIMESTAMP},
+      BookId = #{record.bookid,jdbcType=INTEGER},
+      Creater = #{record.creater,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.joseph.osys.pojos.Note" >
+    update note
+    <set >
+      <if test="notetime != null" >
+        NoteTime = #{notetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bookid != null" >
+        BookId = #{bookid,jdbcType=INTEGER},
+      </if>
+      <if test="creater != null" >
+        Creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="notecontent != null" >
+        NoteContent = #{notecontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where NoteId = #{noteid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.joseph.osys.pojos.Note" >
+    update note
+    set NoteTime = #{notetime,jdbcType=TIMESTAMP},
+      BookId = #{bookid,jdbcType=INTEGER},
+      Creater = #{creater,jdbcType=VARCHAR},
+      NoteContent = #{notecontent,jdbcType=LONGVARCHAR}
+    where NoteId = #{noteid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.joseph.osys.pojos.Note" >
+    update note
+    set NoteTime = #{notetime,jdbcType=TIMESTAMP},
+      BookId = #{bookid,jdbcType=INTEGER},
+      Creater = #{creater,jdbcType=VARCHAR}
+    where NoteId = #{noteid,jdbcType=INTEGER}
+  </update>
+</mapper>

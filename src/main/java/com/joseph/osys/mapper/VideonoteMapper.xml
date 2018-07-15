@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.joseph.osys.mapper.VideonoteMapper" >
+  <resultMap id="BaseResultMap" type="com.joseph.osys.pojos.Videonote" >
+    <id column="noteId" property="noteid" jdbcType="INTEGER" />
+    <result column="notetime" property="notetime" jdbcType="TIMESTAMP" />
+    <result column="chapterid" property="chapterid" jdbcType="INTEGER" />
+    <result column="creater" property="creater" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.joseph.osys.pojos.Videonote" extends="BaseResultMap" >
+    <result column="notecontent" property="notecontent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    noteId, notetime, chapterid, creater
+  </sql>
+  <sql id="Blob_Column_List" >
+    notecontent
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.joseph.osys.pojos.VideonoteExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from videonote
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.joseph.osys.pojos.VideonoteExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from videonote
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from videonote
+    where noteId = #{noteid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from videonote
+    where noteId = #{noteid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.joseph.osys.pojos.VideonoteExample" >
+    delete from videonote
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.joseph.osys.pojos.Videonote" >
+    insert into videonote (noteId, notetime, chapterid, 
+      creater, notecontent)
+    values (#{noteid,jdbcType=INTEGER}, #{notetime,jdbcType=TIMESTAMP}, #{chapterid,jdbcType=INTEGER}, 
+      #{creater,jdbcType=VARCHAR}, #{notecontent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.joseph.osys.pojos.Videonote" >
+    insert into videonote
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="noteid != null" >
+        noteId,
+      </if>
+      <if test="notetime != null" >
+        notetime,
+      </if>
+      <if test="chapterid != null" >
+        chapterid,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="notecontent != null" >
+        notecontent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="noteid != null" >
+        #{noteid,jdbcType=INTEGER},
+      </if>
+      <if test="notetime != null" >
+        #{notetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chapterid != null" >
+        #{chapterid,jdbcType=INTEGER},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="notecontent != null" >
+        #{notecontent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.joseph.osys.pojos.VideonoteExample" resultType="java.lang.Integer" >
+    select count(*) from videonote
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update videonote
+    <set >
+      <if test="record.noteid != null" >
+        noteId = #{record.noteid,jdbcType=INTEGER},
+      </if>
+      <if test="record.notetime != null" >
+        notetime = #{record.notetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chapterid != null" >
+        chapterid = #{record.chapterid,jdbcType=INTEGER},
+      </if>
+      <if test="record.creater != null" >
+        creater = #{record.creater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notecontent != null" >
+        notecontent = #{record.notecontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update videonote
+    set noteId = #{record.noteid,jdbcType=INTEGER},
+      notetime = #{record.notetime,jdbcType=TIMESTAMP},
+      chapterid = #{record.chapterid,jdbcType=INTEGER},
+      creater = #{record.creater,jdbcType=VARCHAR},
+      notecontent = #{record.notecontent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update videonote
+    set noteId = #{record.noteid,jdbcType=INTEGER},
+      notetime = #{record.notetime,jdbcType=TIMESTAMP},
+      chapterid = #{record.chapterid,jdbcType=INTEGER},
+      creater = #{record.creater,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.joseph.osys.pojos.Videonote" >
+    update videonote
+    <set >
+      <if test="notetime != null" >
+        notetime = #{notetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chapterid != null" >
+        chapterid = #{chapterid,jdbcType=INTEGER},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="notecontent != null" >
+        notecontent = #{notecontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where noteId = #{noteid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.joseph.osys.pojos.Videonote" >
+    update videonote
+    set notetime = #{notetime,jdbcType=TIMESTAMP},
+      chapterid = #{chapterid,jdbcType=INTEGER},
+      creater = #{creater,jdbcType=VARCHAR},
+      notecontent = #{notecontent,jdbcType=LONGVARCHAR}
+    where noteId = #{noteid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.joseph.osys.pojos.Videonote" >
+    update videonote
+    set notetime = #{notetime,jdbcType=TIMESTAMP},
+      chapterid = #{chapterid,jdbcType=INTEGER},
+      creater = #{creater,jdbcType=VARCHAR}
+    where noteId = #{noteid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.joseph.osys.mapper.SectorMapper" >
+  <resultMap id="BaseResultMap" type="com.joseph.osys.pojos.Sector" >
+    <id column="SectorId" property="sectorid" jdbcType="INTEGER" />
+    <result column="SectorName" property="sectorname" jdbcType="VARCHAR" />
+    <result column="ChapterId" property="chapterid" jdbcType="INTEGER" />
+    <result column="PDFUrl" property="pdfurl" jdbcType="VARCHAR" />
+    <result column="SectorNameId" property="sectornameid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    SectorId, SectorName, ChapterId, PDFUrl, SectorNameId
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.joseph.osys.pojos.SectorExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sector
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sector
+    where SectorId = #{sectorid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sector
+    where SectorId = #{sectorid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.joseph.osys.pojos.SectorExample" >
+    delete from sector
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.joseph.osys.pojos.Sector" >
+    insert into sector (SectorId, SectorName, ChapterId, 
+      PDFUrl, SectorNameId)
+    values (#{sectorid,jdbcType=INTEGER}, #{sectorname,jdbcType=VARCHAR}, #{chapterid,jdbcType=INTEGER}, 
+      #{pdfurl,jdbcType=VARCHAR}, #{sectornameid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.joseph.osys.pojos.Sector" >
+    insert into sector
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sectorid != null" >
+        SectorId,
+      </if>
+      <if test="sectorname != null" >
+        SectorName,
+      </if>
+      <if test="chapterid != null" >
+        ChapterId,
+      </if>
+      <if test="pdfurl != null" >
+        PDFUrl,
+      </if>
+      <if test="sectornameid != null" >
+        SectorNameId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sectorid != null" >
+        #{sectorid,jdbcType=INTEGER},
+      </if>
+      <if test="sectorname != null" >
+        #{sectorname,jdbcType=VARCHAR},
+      </if>
+      <if test="chapterid != null" >
+        #{chapterid,jdbcType=INTEGER},
+      </if>
+      <if test="pdfurl != null" >
+        #{pdfurl,jdbcType=VARCHAR},
+      </if>
+      <if test="sectornameid != null" >
+        #{sectornameid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.joseph.osys.pojos.SectorExample" resultType="java.lang.Integer" >
+    select count(*) from sector
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sector
+    <set >
+      <if test="record.sectorid != null" >
+        SectorId = #{record.sectorid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sectorname != null" >
+        SectorName = #{record.sectorname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chapterid != null" >
+        ChapterId = #{record.chapterid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pdfurl != null" >
+        PDFUrl = #{record.pdfurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sectornameid != null" >
+        SectorNameId = #{record.sectornameid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sector
+    set SectorId = #{record.sectorid,jdbcType=INTEGER},
+      SectorName = #{record.sectorname,jdbcType=VARCHAR},
+      ChapterId = #{record.chapterid,jdbcType=INTEGER},
+      PDFUrl = #{record.pdfurl,jdbcType=VARCHAR},
+      SectorNameId = #{record.sectornameid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.joseph.osys.pojos.Sector" >
+    update sector
+    <set >
+      <if test="sectorname != null" >
+        SectorName = #{sectorname,jdbcType=VARCHAR},
+      </if>
+      <if test="chapterid != null" >
+        ChapterId = #{chapterid,jdbcType=INTEGER},
+      </if>
+      <if test="pdfurl != null" >
+        PDFUrl = #{pdfurl,jdbcType=VARCHAR},
+      </if>
+      <if test="sectornameid != null" >
+        SectorNameId = #{sectornameid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where SectorId = #{sectorid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.joseph.osys.pojos.Sector" >
+    update sector
+    set SectorName = #{sectorname,jdbcType=VARCHAR},
+      ChapterId = #{chapterid,jdbcType=INTEGER},
+      PDFUrl = #{pdfurl,jdbcType=VARCHAR},
+      SectorNameId = #{sectornameid,jdbcType=INTEGER}
+    where SectorId = #{sectorid,jdbcType=INTEGER}
+  </update>
+</mapper>

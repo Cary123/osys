@@ -1,0 +1,69 @@
+#page-nav {
+	text-align: center;
+	margin-top: 17px;
+	height: 28px;
+}
+
+ul.pages {
+	display: block;
+	border: 0;
+	text-transform: uppercase;
+	font-size: 12px;
+	margin: 10px 0 45px;
+	padding: 0;
+}
+
+ul.pages li.pgNext {
+	width: 50px;
+}
+
+ul.pages li.pgEmpty {
+	border: 1px solid #f0f0f0;
+	color: #d9d6c3;
+	width: 50px;
+	cursor: default;
+}
+
+ul.pages li {
+	display: inline-block;
+	width: 32px;
+	height: 32px;
+	border: 0;
+	margin-left: 5px;
+	line-height: 30px;
+	border: 1px solid #fff;
+	text-align: center;
+	font-size: 12px;
+	background: #fff;
+	color: gray;
+	border: 1px solid #e4e4e4;
+}
+
+ul.pages li.pgCurrent {
+	background: #35b558;
+	color: #fff;
+	border: 1px solid #35B558;
+}
+
+ul.pages li.thpoint {
+	border: 0;
+	cursor: auto;
+	color: #000;
+	background: none !important;
+	margin-top: 3px;
+}
+
+ul.pages li.pagetotal {
+	width: 70px;
+}
+
+ul.pages li.pagenow {
+	width: 100px;
+}
+
+ul.pages li.go {
+	width: 32px;
+	height: 22px;
+	line-height: 22px;
+	margin-top: 6px;
+}

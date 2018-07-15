@@ -1,0 +1,217 @@
+body {
+	font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	background-color: white;
+	font-size: 18px;
+	color: #676a6c;
+	overflow-x: hidden;
+	background-image: url('/osys/static/image/wenda_title_bg.png');
+	padding-bottom:50px;
+}
+
+.nav.navbar-top-links .linkCss {
+	font-family: '微软雅黑';
+	font-weight: bold;
+	font-size: 20px;
+	color: #ffffff;
+	display: inline-block;
+}
+
+.nav>li>a:hover,.nav>li>a:focus {
+	text-decoration: none;
+	background-color: #222;
+}
+
+#page-nav {
+	text-align: center;
+	margin-top: 17px;
+	height: 28px;
+}
+
+ul.pages {
+	display: block;
+	border: 0;
+	text-transform: uppercase;
+	font-size: 12px;
+	margin: 10px 0 45px;
+	padding: 0;
+}
+
+ul.pages li.pgNext {
+	width: 100px;
+}
+
+ul.pages li.pgEmpty {
+	border: 1px solid #f0f0f0;
+	color: #d9d6c3;
+	width: 50px;
+	cursor: default;
+}
+
+ul.pages li {
+	display: inline-block;
+	width: 32px;
+	height: 32px;
+	border: 0;
+	margin-left: 5px;
+	line-height: 30px;
+	border: 1px solid #fff;
+	text-align: center;
+	font-size: 12px;
+	background: #fff;
+	color: gray;
+	border: 1px solid #e4e4e4;
+}
+
+ul.pages li.pgCurrent {
+	background: #35b558;
+	color: #fff;
+	border: 1px solid #35B558;
+}
+
+ul.pages li.thpoint {
+	border: 0;
+	cursor: auto;
+	color: #000;
+	background: none !important;
+	margin-top: 3px;
+}
+
+ul.pages li.pagetotal {
+	width: 70px;
+}
+
+ul.pages li.pagenow {
+	width: 100px;
+}
+
+ul.pages li.go {
+	width: 32px;
+	height: 22px;
+	line-height: 22px;
+	margin-top: 6px;
+}
+
+.ques-answer {
+	position: relative;
+	padding-left: 56px;
+	padding-top: 20px;
+	padding-bottom: 24px;
+	border-bottom: 1px solid #d0d6d9;
+	margin-top: 20px;
+	width: 80%;
+	background-image: url('/osys/static/image/100990_menu_bg.png');
+	background-repeat: repeat;
+}
+
+.ques-answer .tag-img {
+	position: absolute;
+	left: 0;
+	top: 25px;
+	width: 40px;
+	height: 40px;
+	overflow: hidden;
+}
+
+.ques-answer .from-tag {
+	height: 20px;
+	font-size: 12px;
+	line-height: 20px;
+	overflow: hidden;
+	color: #787d82;
+}
+
+.ques-answer .ques-con {
+	line-height: 20px;
+	position: relative;
+}
+
+.ques-answer .answer-con.first {
+	margin-top: 0;
+	border: 0;
+}
+
+.ques-answer .reply-con {
+	display: none;
+	overflow: auto;
+}
+
+.ques-answer .tag-img a {
+	display: block;
+}
+
+.ques-answer .from-tag a {
+	font-size: 12px;
+	color: #787d82;
+	margin-left: 15px;
+}
+
+.ques-answer .ques-con a.ques-con-content {
+	display: block;
+	line-height: 28px;
+	margin-right: 30px;
+	word-break: break-all;
+}
+
+.ques-answer .ques-con a {
+	font-size: 18px;
+	font-weight: 600;
+	color: #14191e;
+}
+
+.ques-answer .answer-con .user {
+	line-height: 20px;
+	margin-top: 24px;
+}
+
+.note-send-textarea {
+	padding-right: 5px;
+}
+
+
+.ans_num {
+	color: gray;
+	font-size: 18px;
+	line-height: 58px;
+	border-bottom: 30px solid gray;
+}
+
+.wd-top-slogan button {
+    width: 160px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background-color: #f01400;
+    color: #fff;
+    float: right;
+    margin-top: 20px;
+    margin-right: 40px;
+}
+
+.wd-top-slogan {
+	clear:both;
+    margin-bottom: 20px;
+    height: 60px;
+    width: 80%;
+}
+
+.contentWidth{
+	width: 80%;
+}
+
+.titleShow{
+	width: 80%;
+	font-size: 20px;
+	color: black;
+	background-image: url('/osys/static/image/101977_menu_bg.png');
+	height: 50px;
+	padding: 10px;
+	text-align: left;
+}
+
+#showSend{
+	width: 80%;
+}
+
+#editor{
+	
+}

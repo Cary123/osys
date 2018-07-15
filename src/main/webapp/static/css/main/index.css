@@ -1,0 +1,22 @@
+#mainBox{
+	position: relative;
+	background-color: #FFFFFF;
+}
+
+.box{
+	padding: 15px 0 0 15px;
+	float: left;
+}
+
+
+.pic img{
+	border-radius: 5px;
+	width: 200px;
+	height: 250px;
+}
+
+.pic video{
+	border-radius: 5px;
+	width: 200px;
+	height: 250px;
+}

@@ -1,0 +1,17 @@
+jdbc.driver=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://115.159.183.24:3306/osys
+jdbc.username=admin
+jdbc.password=123456
+
+
+jdbc.driver=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://localhost:3306/osys
+jdbc.username=cary
+jdbc.password=123456
+
+<!-- 引入Bootstrap CSS框架 awesome字体-->
+<link href="static/css/bootstrap/3.3.4/bootstrap.min.css"  rel="stylesheet">
+<link href="static/fonts/font-awesome/css/font-awesome.css"  rel="stylesheet">
+<!-- 引入主要jQuery 等js框架 -->
+<script src="static/js/jquery-2.1.1.js" ></script>
+<script src="static/js/bootstrap/3.3.4/bootstrap.min.js" ></script>
